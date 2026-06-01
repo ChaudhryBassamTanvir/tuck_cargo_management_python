@@ -15,7 +15,9 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
-    ports: ["5672:5672", "15672:15672"]   # 15672 = UI at localhost:15672
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: cargo
       RABBITMQ_DEFAULT_PASS: cargo
