@@ -2,7 +2,20 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.orm import DeclarativeBase
 from app.core.config import settings
 
-engine = create_async_engine(settings.DATABASE_URL, echo=settings.DEBUG, pool_pre_ping=True)
+# Pass credentials separately to handle special characters in password
+engine = create_async_engine(
+    "postgresql+asyncpg://",
+    connect_args={
+        "host": "localhost",
+        "port": 5432,
+        "user": "cargo_user",
+        "password": settings.DB_PASSWORD,
+        "database": "cargo_db",
+    },
+    echo=settings.DEBUG,
+    pool_pre_ping=True,
+)
+
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
 class Base(DeclarativeBase):

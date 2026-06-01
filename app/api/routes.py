@@ -9,7 +9,6 @@ import uuid
 
 router = APIRouter()
 
-# ── Trucks ────────────────────────────────────────────────────────────────────
 @router.post("/trucks", response_model=TruckOut)
 async def add_truck(data: TruckCreate, db: AsyncSession = Depends(get_db)):
     return await cargo_service.create_truck(db, data)
@@ -18,7 +17,6 @@ async def add_truck(data: TruckCreate, db: AsyncSession = Depends(get_db)):
 async def get_trucks(db: AsyncSession = Depends(get_db)):
     return await cargo_service.list_trucks(db)
 
-# ── Cargo ─────────────────────────────────────────────────────────────────────
 @router.post("/cargos", response_model=CargoOut)
 async def add_cargo(data: CargoCreate, db: AsyncSession = Depends(get_db)):
     cargo = await cargo_service.create_cargo(db, data)

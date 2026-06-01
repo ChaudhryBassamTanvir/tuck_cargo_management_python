@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     SYNC_DATABASE_URL: str
     REDIS_URL: str
     RABBITMQ_URL: str
+    DB_PASSWORD: str = "cargo_pass"
 
     class Config:
         env_file = ".env"

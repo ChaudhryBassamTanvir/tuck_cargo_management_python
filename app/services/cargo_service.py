@@ -3,9 +3,8 @@ from sqlalchemy import select
 from app.models.cargo import Cargo, Truck, CargoEvent, StatusEnum
 from app.schemas.cargo import CargoCreate, CargoUpdate
 from loguru import logger
-import json, uuid
+import json
 
-# ── Reusable helpers ──────────────────────────────────────────────────────────
 async def _get_or_404(session: AsyncSession, model, id):
     obj = await session.get(model, id)
     if not obj:
@@ -17,7 +16,6 @@ async def _log_event(session: AsyncSession, cargo_id, event_type: str, payload: 
     session.add(event)
     logger.info(f"[EVENT] {event_type} cargo={cargo_id}")
 
-# ── Truck CRUD ────────────────────────────────────────────────────────────────
 async def create_truck(session: AsyncSession, data):
     truck = Truck(**data.model_dump())
     session.add(truck)
@@ -28,7 +26,6 @@ async def list_trucks(session: AsyncSession):
     result = await session.execute(select(Truck))
     return result.scalars().all()
 
-# ── Cargo CRUD ────────────────────────────────────────────────────────────────
 async def create_cargo(session: AsyncSession, data: CargoCreate):
     cargo = Cargo(**data.model_dump())
     session.add(cargo)
