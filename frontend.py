@@ -28,10 +28,10 @@ STATUS_COLOR = {
     "failed":     DANGER,
 }
 STATUS_ICON = {
-    "pending":    ft.icons.HOURGLASS_EMPTY_ROUNDED,
-    "in_transit": ft.icons.LOCAL_SHIPPING_ROUNDED,
-    "delivered":  ft.icons.CHECK_CIRCLE_ROUNDED,
-    "failed":     ft.icons.ERROR_ROUNDED,
+    "pending":    ft.Icons.HOURGLASS_EMPTY,
+    "in_transit": ft.Icons.LOCAL_SHIPPING,
+    "delivered":  ft.Icons.CHECK_CIRCLE,
+    "failed":     ft.Icons.ERROR,
 }
 
 # ── Reusable components ───────────────────────────────────────────────────────
@@ -97,8 +97,8 @@ def main(page: ft.Page):
     cargos      = []
     trucks      = []
     logs        = []
-    active_tab  = ft.Ref[str]()
-    active_tab.current = "dashboard"
+    active_tab = {"current": "dashboard"}
+    
 
     # ── Refs for dynamic UI ───────────────────────────────────────────────────
     stats_row       = ft.Ref[ft.Row]()
@@ -569,4 +569,4 @@ def main(page: ft.Page):
     page.run_task(on_start)
 
 
-ft.app(target=main)
+ft.app(main)
