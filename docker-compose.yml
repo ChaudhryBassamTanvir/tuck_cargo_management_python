@@ -2,25 +2,33 @@ version: "3.9"
 services:
   db:
     image: postgres:16
+    container_name: cargo_db
     environment:
       POSTGRES_DB: cargo_db
       POSTGRES_USER: cargo_user
       POSTGRES_PASSWORD: cargo_pass
-    ports: ["5432:5432"]
-    volumes: [pgdata:/var/lib/postgresql/data]
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
 
   redis:
     image: redis:7
-    ports: ["6379:6379"]
+    container_name: cargo_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
 
   rabbitmq:
     image: rabbitmq:3-management
+    container_name: cargo_rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: cargo
-      RABBITMQ_DEFAULT_PASS: cargo
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    restart: unless-stopped
 
 volumes:
   pgdata:
