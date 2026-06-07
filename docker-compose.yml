@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   db:
     image: postgres:16
@@ -26,9 +25,14 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: cargo
+      RABBITMQ_DEFAULT_PASS: cargo
     volumes:
-      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/loopback.conf
+      - rabbitmq_data:/var/lib/rabbitmq
     restart: unless-stopped
 
 volumes:
   pgdata:
+  rabbitmq_data:

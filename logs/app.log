@@ -31,3 +31,6 @@
 2026-06-05 11:07:20.148 | INFO     | app.main:lifespan:18 - DB tables ready
 2026-06-05 11:08:45.793 | INFO     | app.main:lifespan:18 - DB tables ready
 2026-06-05 11:14:41.751 | INFO     | app.main:lifespan:18 - DB tables ready
+2026-06-05 12:03:34.286 | INFO     | app.main:lifespan:18 - DB tables ready
+2026-06-05 12:04:19.940 | INFO     | app.main:lifespan:18 - DB tables ready
+2026-06-05 12:07:15.645 | INFO     | app.main:lifespan:18 - DB tables ready
